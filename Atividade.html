@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra Papel e Tesoura</title>
+
+    <!--Criar um jogo como Pedra, Papel e Tesoura é uma maneira fantástica de praticar a criação de funções, o uso de arrays e a lógica condicional (if/else).
+        1. Estruture o código em funções claras, cada uma com uma responsabilidade específica
+        2. Solicite do usuário uma das possíveis opções para o jogo
+        3. Gere aleatoriamente a jogada do Computador (Math.random() e Math.floor())
+        4. Compare a jogada do usuário com a jogada do computador
+        5. Informe o vencedor
+        6. Continue no looping até que o usuário decida encerrar-->
+</head>
+<body>
+    <script>
+        function obterEscolhaUsuario() {
+            const escolha = prompt("Escolha Pedra, Papel ou Tesoura:").toLowerCase();
+            const opcoes = ["pedra", "papel", "tesoura"];
+            if (opcoes.includes(escolha)) {
+                return escolha;
+            } else {
+                alert("Escolha inválida. Tente novamente!");
+                return obterEscolhaUsuario();
+            }
+        }
+
+        function gerarEscolhaComputador() {
+            const opcoes = ["pedra", "papel", "tesoura"];
+            const indice = Math.floor(Math.random() * 3);
+            return opcoes[indice];
+        }
+
+        function determinarVencedor(usuario, computador) {
+            if (usuario === computador) {
+                return "Empate!";
+            }
+
+            if (
+                (usuario === "pedra" && computador === "tesoura") ||
+                (usuario === "papel" && computador === "pedra") ||
+                (usuario === "tesoura" && computador === "papel")
+            ) {
+                return "Você venceu!";
+            } else {
+                return "O computador venceu!";
+            }
+        }
+
+        function jogarNovamente() {
+            const resposta = prompt("Deseja jogar novamente? (s/n)").toLowerCase();
+            return resposta === "s";
+        }
+
+        function jogar() {
+            alert("Bem-vindo ao jogo Pedra, Papel e Tesoura!\nVocê irá jogar contra o seu computador!");
+
+            do {
+                const escolhaUsuario = obterEscolhaUsuario();
+                const escolhaComputador = gerarEscolhaComputador();
+                alert(`Computador escolheu: ${escolhaComputador}`);
+                const resultado = determinarVencedor(escolhaUsuario, escolhaComputador);
+                alert(resultado);
+            } while (jogarNovamente());
+
+            alert("Obrigada por jogar!");
+        }
+
+        jogar();
+
+    </script>
+</body>
+</html>
